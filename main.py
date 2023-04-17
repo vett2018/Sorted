@@ -40,11 +40,33 @@ def bubble_sort(list_: list) -> list:
                 list_[j], list_[j+1] = list_[j+1], list_[j]
     return list_
 
+def selection_sort(list_: list) -> list:
+    """
+    Сортировка выборкой
+    :param list_: Список
+    :return: Отсортированный список
+    """
+    # Значение i соответствует кол-ву отсортированных значений
+    for i in range(len(list_)):
+        # Исходно считаем наименьшим первый элемент
+        lowest_value_index = i
+        # Этот цикл перебирает несортированные элементы
+        for j in range(i + 1, len(list_)):
+            if list_[j] < list_[lowest_value_index]:
+                lowest_value_index = j
+        # Самый маленький элемент меняем с первым в списке
+        list_[i], list_[lowest_value_index] = list_[lowest_value_index], list_[i]
+    return list_
+
+
+
+
 if __name__ == '__main__':
     n = int(input("Введите длину массива = "))
-    new_arr = mas(n).copy()
-    print(new_arr)
-    max_min(new_arr)
-    bubble_sort(new_arr)
-    print(new_arr)
-
+    sort_temp_arr = mas(n).copy()
+    print(sort_temp_arr)
+    max_min(sort_temp_arr)
+    bubble_sort(sort_temp_arr)
+    print(f"Cортировка пузырьком:\n{sort_temp_arr}")
+    selection_sort(sort_temp_arr)
+    print(f"Cортировка выборкой:\n{sort_temp_arr}")
