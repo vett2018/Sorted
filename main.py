@@ -58,7 +58,25 @@ def selection_sort(list_: list) -> list:
         list_[i], list_[lowest_value_index] = list_[lowest_value_index], list_[i]
     return list_
 
-
+def insertion_sort(list_: list) -> list:
+    """
+    Сортировка вставками
+    :param list_: Список
+    :return: отсортированный список
+    """
+    # Сортировку начинаем со второго элемента, т.к. считается, что первый элемент уже отсортирован
+    for i in range(1, len(list_)):
+        item_to_insert = list_[i]
+        # Сохраняем ссылку на индекс предыдущего элемента
+        j = i - 1
+        # Элементы отсортированного сегмента перемещаем вперёд, если они больше
+        # элемента для вставки
+        while j >= 0 and list_[j] > item_to_insert:
+            list_[j + 1] = list_[j]
+            j -= 1
+        # Вставляем элемент
+        list_[j + 1] = item_to_insert
+    return list_
 
 
 if __name__ == '__main__':
@@ -70,3 +88,5 @@ if __name__ == '__main__':
     print(f"Cортировка пузырьком:\n{sort_temp_arr}")
     selection_sort(sort_temp_arr)
     print(f"Cортировка выборкой:\n{sort_temp_arr}")
+    insertion_sort(sort_temp_arr)
+    print(f"Cортировка вставками:\n{sort_temp_arr}")
