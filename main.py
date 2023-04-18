@@ -144,7 +144,20 @@ def merge(left_list, right_list): # Сортировка слиянием
 
     return sorted_list
 
+def merge_sort_2(list_: list) -> list:
+    """
+    Сортировка слиянием второй вариант исполнения
+    :param list_: Список
+    :return: Отсортированный список
+    """
+    if len(list_) > 1:
+        mid = len(list_) // 2
+        left = list_[:mid]
+        right = list_[mid:]
+        merge_sort_2(list_)
+        merge_sort(right)
 
+        #i = j = k = 0
 
 def quick_sort(list_: list) -> list:
     # Создадим вспомогательную функцию, которая вызывается рекурсивно
