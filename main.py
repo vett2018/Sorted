@@ -151,13 +151,48 @@ def merge_sort_2(list_: list) -> list:
     :return: Отсортированный список
     """
     if len(list_) > 1:
-        mid = len(list_) // 2
-        left = list_[:mid]
-        right = list_[mid:]
-        merge_sort_2(list_)
-        merge_sort(right)
+        mid = len(list_) // 2 # разделить список надвое
+        left = list_[:mid] # формирование левого списка
+        right = list_[mid:] # формирование правго списка
+        merge_sort_2(left)
+        merge_sort_2(right)
+        """
+        i — индекс в списке left,
+        j — индекс в списке right,
+        k — индекс в исходном списке list_, в который в конечном итоге
+        нужно вставить все числа по порядку.
+        
+        Если число из списка left меньше, чем число из списка right, 
+        мы вставляем его в list_ на позицию k, после чего увеличиваем индекс i на единицу. 
+        Если число из списка right меньше или равно числу из списка left, 
+        тогда оно отправляется в list_, а мы увеличиваем на единицу индекс j. 
+        Наконец, после добавления любого из чисел в список list_, 
+        мы увеличиваем на единицу индекс k.
+        """
+        i = j = k = 0
+        while i < len(left) and j < len(right): # если эти условия выполняются, цикл прерывается
+            if left[i] < right[j]:
+                list_[k] = left[i]
+                i += 1
+            else:
+                list_[k] = right[j]
+                j += 1
+            k += 1
+            """
+            если мы дойдем до конца списка left, а в списке right еще останутся элементы?
+            На этот случай нам нужно сделать еще один цикл while.
+            В этом цикле мы будем перебирать остаток элементов в списке right и добавлять их в список list_. 
+            То же самое мы сделаем и для списка left.
+            """
+            while j < len(right):
+                list_[k] = right[j]
+                j += 1
+                k += 1
+            while i < len(left):
+                list_[k] = left[i]
+                i += 1
+                k += 1
 
-        #i = j = k = 0
 
 def quick_sort(list_: list) -> list:
     # Создадим вспомогательную функцию, которая вызывается рекурсивно
@@ -213,3 +248,12 @@ if __name__ == '__main__':
     print(f"Cортировка слиянием:\n{sort_temp_arr}")
     quick_sort(sort_temp_arr)
     print(f"Быстрая сортировка:\n{sort_temp_arr}")
+    merge_sort_2(sort_temp_arr)
+    print(f"Cортировка слиянием_2:\n{sort_temp_arr}")
+
+    # mid = len(sort_temp_arr)   # разделить список надвое
+    # left = sort_temp_arr[:mid]  # левый список
+    # right = sort_temp_arr[mid:]  # правый список
+    # print(f'середина {mid}')
+    # print(f' левый  {left}')
+    # print(f' правый  {right}')
